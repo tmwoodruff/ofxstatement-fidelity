@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0c80e3e03ea46e4f2ce0aa6504b7430791e4e61edf4d8c1ed695a5e9178d1e14"
+            "sha256": "171a7b0cc74e82703c634448ac204799d775adaf9a71719f4399bebe288f7862"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -14,32 +14,22 @@
         ]
     },
     "default": {
-        "appdirs": {
-            "hashes": [
-                "sha256:7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41",
-                "sha256:a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"
-            ],
-            "version": "==1.4.4"
-        },
         "ofxstatement": {
-            "hashes": [
-                "sha256:2276c7e697f3f668f9ad6c40156b732b6d7a2dbd4117d61042ca4085f2f26b6f",
-                "sha256:e8c57537c9a4a9a5e5edf8dd51bd62bb5054b237ef17a19230b48432d5479416"
-            ],
-            "index": "pypi",
-            "version": "==0.9.1"
+            "git": "https://github.com/kedder/ofxstatement.git",
+            "markers": "python_version >= '3.9'",
+            "ref": "5e92ee11df55ae57891a2cea51a6556f9bf14b9c"
         },
-        "ofxstatement-sample": {
+        "ofxstatement-fidelity": {
             "editable": true,
             "path": "."
         },
-        "setuptools": {
+        "platformdirs": {
             "hashes": [
-                "sha256:385eb4edd9c9d5c17540511303e39a147ce2fc04bc55289c322b9e5904fe2c05",
-                "sha256:be1af57fc409f93647f2e8e4573a142ed38724b8cdd389706a867bb4efcf1e78"
+                "sha256:61d5cdcc6065745cdd94f0f878977f8de9437be93de97c1c12f853c9c0cdcbda",
+                "sha256:d03afa3963c806a9bed9d5125c8f4cb2fdaf74a55ab60e5d59b3fde758104d31"
             ],
-            "markers": "python_version >= '3.8'",
-            "version": "==69.0.3"
+            "markers": "python_version >= '3.10'",
+            "version": "==4.5.1"
         }
     },
     "develop": {
