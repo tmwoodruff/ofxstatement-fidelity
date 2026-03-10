@@ -32,11 +32,14 @@ ACTIONS = [
     ["YOU SOLD", "SELLSTOCK", "SELL"],
     ["SHORT-TERM CAP GAIN", "INCOME", "CGSHORT"],
     ["LONG-TERM CAP GAIN", "INCOME", "CGLONG"],
+    ["Change in Market Value", "IGNORE"],
+    ["Withdrawals", "DEBIT"],
     ["DEBIT CARD PURCHASE", "DEBIT"],
     ["TRANSFERRED FROM", "XFER"],
     ["TRANSFERRED TO", "XFER"],
-    ["ROLLOVER CASH CHECK RECEIVED", "XFER"],
-    ["TRANSFER OF ASSETS CHECK RECEIVED", "XFER"],
+    ["ROLLOVER CASH", "XFER"],
+    ["TRANSFER OF ASSETS", "XFER"],
+    ["PART CONTRIB", "CREDIT"],
     ["CASH ADVANCE", "DEBIT"],
     ["ADJUST FEE CHARGED", "CREDIT"],
     ["Check Paid", "DEBIT"]
@@ -99,8 +102,8 @@ class FidelityCSVParser(AbstractStatementParser):
         for action in ACTIONS:
             if (
                 action_value.startswith(action[0])
-                and len(action_value) > len(action[0])
-                and action_value[len(action[0]) == " "]
+                and len(action_value) >= len(action[0])
+                and (action_value == action[0] or action_value[len(action[0]) == " "])
             ):
                 return action
         raise Exception("Could not find action for " + action_value)
@@ -141,7 +144,9 @@ class FidelityCSVParser(AbstractStatementParser):
         unit_price_value = self.get_col(line, "Price ($)")
         if unit_price_value and unit_price_value != "":
             stmt_line.unit_price = Decimal(unit_price_value)
-            stmt_line.units = Decimal(self.get_col(line, "Quantity"))
+            quantity_value = self.get_col(line, "Quantity")
+            if quantity_value and quantity_value != "":
+                stmt_line.units = Decimal(quantity_value)
 
     def set_bank_fields(self, stmt_line: StatementLine, line: list[str]):
         settlement_date = self.get_col(line, "Settlement Date")
@@ -221,6 +226,9 @@ class FidelityCSVParser(AbstractStatementParser):
             stmt_line = StatementLine()
             self.set_common_fields(stmt_line, line)
             self.set_bank_fields(stmt_line, line)
+
+        if stmt_line.trntype == "IGNORE" or getattr(stmt_line, "trntype_detailed", None) == "IGNORE":
+            return None
 
         return stmt_line
 
