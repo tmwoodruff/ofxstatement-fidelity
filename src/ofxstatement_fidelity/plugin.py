@@ -33,8 +33,11 @@ ACTIONS = [
     ["SHORT-TERM CAP GAIN", "INCOME", "CGSHORT"],
     ["LONG-TERM CAP GAIN", "INCOME", "CGLONG"],
     ["Change in Market Value", "IGNORE"],
+    ["DISTRIBUTION", "IGNORE"],
+    ["NAME CHANGED", "IGNORE"],
     ["Withdrawals", "DEBIT"],
     ["DEBIT CARD PURCHASE", "DEBIT"],
+    ["DEBIT CARD RETURN", "CREDIT"],
     ["TRANSFERRED FROM", "XFER"],
     ["TRANSFERRED TO", "XFER"],
     ["ROLLOVER CASH", "XFER"],
@@ -42,7 +45,8 @@ ACTIONS = [
     ["PART CONTRIB", "CREDIT"],
     ["CASH ADVANCE", "DEBIT"],
     ["ADJUST FEE CHARGED", "CREDIT"],
-    ["Check Paid", "DEBIT"]
+    ["Check Paid", "DEBIT"],
+    ["CHECK RECEIVED", "CREDIT"]
 ]
 
 
